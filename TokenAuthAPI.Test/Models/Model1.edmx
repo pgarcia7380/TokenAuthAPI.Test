@@ -1,0 +1,1176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="smacModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="Empleado" Type="int" />
+          <Property Name="Cargo" Type="int" />
+          <Property Name="Departamento" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Actividad" Type="nvarchar" MaxLength="650" />
+          <Property Name="Dirigido" Type="int" />
+          <Property Name="Estatus" Type="int" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ActividadEstatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AppLogins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppWeb" Type="int" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="HoraLogin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enlace" Type="nvarchar" MaxLength="1500" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="250" />
+          <Property Name="Cedula" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="GrupoOcupacionalId" Type="int" />
+          <Property Name="PeriodoId" Type="int" />
+          <Property Name="UnidadId" Type="int" />
+          <Property Name="CargoId" Type="int" />
+          <Property Name="SupervisorId" Type="int" />
+          <Property Name="UsuarioAD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'smac.dbo.Estructura' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Estructura">
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="255" />
+          <Property Name="PeriodoId" Type="int" />
+          <Property Name="PERIODO" Type="nvarchar" MaxLength="255" />
+          <Property Name="CargoId" Type="int" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="255" />
+          <Property Name="NO# CEDULA" Type="nvarchar" MaxLength="255" />
+          <Property Name="GrupoOcupacionalId" Type="int" />
+          <Property Name="GRUPO OCUPACIONAL" Type="nvarchar" MaxLength="255" />
+          <Property Name="UnidadOrganizativaId" Type="int" />
+          <Property Name="UNIDAD ORGANIZATIVA" Type="nvarchar" MaxLength="255" />
+          <Property Name="SuperiorId" Type="int" />
+          <Property Name="NOMBRE SUPERIOR INMEDIATO" Type="nvarchar" MaxLength="255" />
+          <Property Name="CARGO1" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <EntityType Name="EstructuraOrganizacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnidadPadreId" Type="int" />
+          <Property Name="UnidadDependeciaId" Type="int" />
+        </EntityType>
+        <EntityType Name="GrupoOcupacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Politicas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categorias" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UnidadOrganizativa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="150" />
+          <Property Name="UnidadApoyo" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="UnidadOrganizativaPoliticas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnidadOrganizativaId" Type="int" />
+          <Property Name="PoliticasId" Type="int" />
+          <Property Name="EstatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppWeb" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Actividades_ActividadEstatus">
+          <End Role="ActividadEstatus" Type="Self.ActividadEstatus" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActividadEstatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_Empleados1">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_UnidadOrganizativa2">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_UnidadOrganizativa3">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Dirigido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CargoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_GrupoOcupacional">
+          <End Role="GrupoOcupacional" Type="Self.GrupoOcupacional" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoOcupacional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="GrupoOcupacionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="PeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Supervisor">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Empleados1" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados1">
+              <PropertyRef Name="SupervisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Unidad">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="UnidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstructuraOrganizacional_UnidadOrdChild">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="EstructuraOrganizacional" Type="Self.EstructuraOrganizacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EstructuraOrganizacional">
+              <PropertyRef Name="UnidadDependeciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstructuraOrganizacional_UnidadOrg">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="EstructuraOrganizacional" Type="Self.EstructuraOrganizacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EstructuraOrganizacional">
+              <PropertyRef Name="UnidadPadreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_Politicas">
+          <End Role="Politicas" Type="Self.Politicas" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Politicas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="PoliticasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_UnidadOrganizativa">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="UnidadOrganizativaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserApps_AppWeb">
+          <End Role="AppWeb" Type="Self.AppWeb" Multiplicity="1" />
+          <End Role="UserApps" Type="Self.UserApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserApps">
+              <PropertyRef Name="AppWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserApps_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserApps" Type="Self.UserApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserApps">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="smacModelStoreContainer">
+          <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActividadEstatus" EntityType="Self.ActividadEstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppLogins" EntityType="Self.AppLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppWeb" EntityType="Self.AppWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstructuraOrganizacional" EntityType="Self.EstructuraOrganizacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoOcupacional" EntityType="Self.GrupoOcupacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Politicas" EntityType="Self.Politicas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnidadOrganizativa" EntityType="Self.UnidadOrganizativa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnidadOrganizativaPoliticas" EntityType="Self.UnidadOrganizativaPoliticas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserApps" EntityType="Self.UserApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Actividades_ActividadEstatus" Association="Self.FK_Actividades_ActividadEstatus">
+            <End Role="ActividadEstatus" EntitySet="ActividadEstatus" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_Cargo1" Association="Self.FK_Actividades_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_Empleados1" Association="Self.FK_Actividades_Empleados1">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_UnidadOrganizativa2" Association="Self.FK_Actividades_UnidadOrganizativa2">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_UnidadOrganizativa3" Association="Self.FK_Actividades_UnidadOrganizativa3">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Cargo" Association="Self.FK_Empleados_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_GrupoOcupacional" Association="Self.FK_Empleados_GrupoOcupacional">
+            <End Role="GrupoOcupacional" EntitySet="GrupoOcupacional" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Periodo" Association="Self.FK_Empleados_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Supervisor" Association="Self.FK_Empleados_Supervisor">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Empleados1" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Unidad" Association="Self.FK_Empleados_Unidad">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstructuraOrganizacional_UnidadOrdChild" Association="Self.FK_EstructuraOrganizacional_UnidadOrdChild">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="EstructuraOrganizacional" EntitySet="EstructuraOrganizacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstructuraOrganizacional_UnidadOrg" Association="Self.FK_EstructuraOrganizacional_UnidadOrg">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="EstructuraOrganizacional" EntitySet="EstructuraOrganizacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_Estatus" Association="Self.FK_UnidadOrganizativaPoliticas_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_Politicas" Association="Self.FK_UnidadOrganizativaPoliticas_Politicas">
+            <End Role="Politicas" EntitySet="Politicas" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_UnidadOrganizativa" Association="Self.FK_UnidadOrganizativaPoliticas_UnidadOrganizativa">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserApps_AppWeb" Association="Self.FK_UserApps_AppWeb">
+            <End Role="AppWeb" EntitySet="AppWeb" />
+            <End Role="UserApps" EntitySet="UserApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserApps_Users" Association="Self.FK_UserApps_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserApps" EntitySet="UserApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="smacModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Empleado" Type="Int32" />
+          <Property Name="Cargo" Type="Int32" />
+          <Property Name="Departamento" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Actividad" Type="String" MaxLength="650" FixedLength="false" Unicode="true" />
+          <Property Name="Dirigido" Type="Int32" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ActividadEstatus" Relationship="Self.FK_Actividades_ActividadEstatus" FromRole="Actividades" ToRole="ActividadEstatus" />
+          <NavigationProperty Name="Cargo1" Relationship="Self.FK_Actividades_Cargo1" FromRole="Actividades" ToRole="Cargo" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Actividades_Empleados1" FromRole="Actividades" ToRole="Empleados" />
+          <NavigationProperty Name="UnidadOrganizativa" Relationship="Self.FK_Actividades_UnidadOrganizativa2" FromRole="Actividades" ToRole="UnidadOrganizativa" />
+          <NavigationProperty Name="UnidadOrganizativa1" Relationship="Self.FK_Actividades_UnidadOrganizativa3" FromRole="Actividades" ToRole="UnidadOrganizativa" />
+        </EntityType>
+        <EntityType Name="ActividadEstatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK_Actividades_ActividadEstatus" FromRole="ActividadEstatus" ToRole="Actividades" />
+        </EntityType>
+        <EntityType Name="AppLogins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppWeb" Type="Int32" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoraLogin" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="AppWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enlace" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserApps" Relationship="Self.FK_UserApps_AppWeb" FromRole="AppWeb" ToRole="UserApps" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK_Actividades_Cargo1" FromRole="Cargo" ToRole="Actividades" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Cargo" FromRole="Cargo" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="GrupoOcupacionalId" Type="Int32" />
+          <Property Name="PeriodoId" Type="Int32" />
+          <Property Name="UnidadId" Type="Int32" />
+          <Property Name="CargoId" Type="Int32" />
+          <Property Name="SupervisorId" Type="Int32" />
+          <Property Name="UsuarioAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK_Actividades_Empleados1" FromRole="Empleados" ToRole="Actividades" />
+          <NavigationProperty Name="Cargo" Relationship="Self.FK_Empleados_Cargo" FromRole="Empleados" ToRole="Cargo" />
+          <NavigationProperty Name="GrupoOcupacional" Relationship="Self.FK_Empleados_GrupoOcupacional" FromRole="Empleados" ToRole="GrupoOcupacional" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK_Empleados_Periodo" FromRole="Empleados" ToRole="Periodo" />
+          <NavigationProperty Name="Empleados1" Relationship="Self.FK_Empleados_Supervisor" FromRole="Empleados" ToRole="Empleados1" />
+          <NavigationProperty Name="Empleados2" Relationship="Self.FK_Empleados_Supervisor" FromRole="Empleados1" ToRole="Empleados" />
+          <NavigationProperty Name="UnidadOrganizativa" Relationship="Self.FK_Empleados_Unidad" FromRole="Empleados" ToRole="UnidadOrganizativa" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estatus1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UnidadOrganizativaPoliticas" Relationship="Self.FK_UnidadOrganizativaPoliticas_Estatus" FromRole="Estatus" ToRole="UnidadOrganizativaPoliticas" />
+        </EntityType>
+        <EntityType Name="EstructuraOrganizacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnidadPadreId" Type="Int32" />
+          <Property Name="UnidadDependeciaId" Type="Int32" />
+          <NavigationProperty Name="UnidadOrganizativa" Relationship="Self.FK_EstructuraOrganizacional_UnidadOrdChild" FromRole="EstructuraOrganizacional" ToRole="UnidadOrganizativa" />
+          <NavigationProperty Name="UnidadOrganizativa1" Relationship="Self.FK_EstructuraOrganizacional_UnidadOrg" FromRole="EstructuraOrganizacional" ToRole="UnidadOrganizativa" />
+        </EntityType>
+        <EntityType Name="GrupoOcupacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_GrupoOcupacional" FromRole="GrupoOcupacional" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Periodo" FromRole="Periodo" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Politicas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categorias" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UnidadOrganizativaPoliticas" Relationship="Self.FK_UnidadOrganizativaPoliticas_Politicas" FromRole="Politicas" ToRole="UnidadOrganizativaPoliticas" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Role" FromRole="Role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UnidadOrganizativa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UnidadApoyo" Type="Byte" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK_Actividades_UnidadOrganizativa2" FromRole="UnidadOrganizativa" ToRole="Actividades" />
+          <NavigationProperty Name="Actividades1" Relationship="Self.FK_Actividades_UnidadOrganizativa3" FromRole="UnidadOrganizativa" ToRole="Actividades" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Unidad" FromRole="UnidadOrganizativa" ToRole="Empleados" />
+          <NavigationProperty Name="EstructuraOrganizacional" Relationship="Self.FK_EstructuraOrganizacional_UnidadOrdChild" FromRole="UnidadOrganizativa" ToRole="EstructuraOrganizacional" />
+          <NavigationProperty Name="EstructuraOrganizacional1" Relationship="Self.FK_EstructuraOrganizacional_UnidadOrg" FromRole="UnidadOrganizativa" ToRole="EstructuraOrganizacional" />
+          <NavigationProperty Name="UnidadOrganizativaPoliticas" Relationship="Self.FK_UnidadOrganizativaPoliticas_UnidadOrganizativa" FromRole="UnidadOrganizativa" ToRole="UnidadOrganizativaPoliticas" />
+        </EntityType>
+        <EntityType Name="UnidadOrganizativaPoliticas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnidadOrganizativaId" Type="Int32" />
+          <Property Name="PoliticasId" Type="Int32" />
+          <Property Name="EstatusId" Type="Int32" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_UnidadOrganizativaPoliticas_Estatus" FromRole="UnidadOrganizativaPoliticas" ToRole="Estatus" />
+          <NavigationProperty Name="Politicas" Relationship="Self.FK_UnidadOrganizativaPoliticas_Politicas" FromRole="UnidadOrganizativaPoliticas" ToRole="Politicas" />
+          <NavigationProperty Name="UnidadOrganizativa" Relationship="Self.FK_UnidadOrganizativaPoliticas_UnidadOrganizativa" FromRole="UnidadOrganizativaPoliticas" ToRole="UnidadOrganizativa" />
+        </EntityType>
+        <EntityType Name="UserApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppWeb" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppWeb1" Relationship="Self.FK_UserApps_AppWeb" FromRole="UserApps" ToRole="AppWeb" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UserApps_Users" FromRole="UserApps" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role1" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+          <NavigationProperty Name="UserApps" Relationship="Self.FK_UserApps_Users" FromRole="Users" ToRole="UserApps" />
+        </EntityType>
+        <Association Name="FK_Actividades_ActividadEstatus">
+          <End Role="ActividadEstatus" Type="Self.ActividadEstatus" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActividadEstatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_Empleados1">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_UnidadOrganizativa2">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Actividades_UnidadOrganizativa3">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="Dirigido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserApps_AppWeb">
+          <End Role="AppWeb" Type="Self.AppWeb" Multiplicity="1" />
+          <End Role="UserApps" Type="Self.UserApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserApps">
+              <PropertyRef Name="AppWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CargoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_GrupoOcupacional">
+          <End Role="GrupoOcupacional" Type="Self.GrupoOcupacional" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoOcupacional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="GrupoOcupacionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="PeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Supervisor">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Empleados1" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados1">
+              <PropertyRef Name="SupervisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Unidad">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="UnidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="EstatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstructuraOrganizacional_UnidadOrdChild">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="EstructuraOrganizacional" Type="Self.EstructuraOrganizacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EstructuraOrganizacional">
+              <PropertyRef Name="UnidadDependeciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstructuraOrganizacional_UnidadOrg">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="EstructuraOrganizacional" Type="Self.EstructuraOrganizacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EstructuraOrganizacional">
+              <PropertyRef Name="UnidadPadreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_Politicas">
+          <End Role="Politicas" Type="Self.Politicas" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Politicas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="PoliticasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnidadOrganizativaPoliticas_UnidadOrganizativa">
+          <End Role="UnidadOrganizativa" Type="Self.UnidadOrganizativa" Multiplicity="0..1" />
+          <End Role="UnidadOrganizativaPoliticas" Type="Self.UnidadOrganizativaPoliticas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadOrganizativa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnidadOrganizativaPoliticas">
+              <PropertyRef Name="UnidadOrganizativaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserApps_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserApps" Type="Self.UserApps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserApps">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="smacEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividades" EntityType="Self.Actividades" />
+          <EntitySet Name="ActividadEstatus" EntityType="Self.ActividadEstatus" />
+          <EntitySet Name="AppLogins" EntityType="Self.AppLogins" />
+          <EntitySet Name="AppWeb" EntityType="Self.AppWeb" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" />
+          <EntitySet Name="EstructuraOrganizacional" EntityType="Self.EstructuraOrganizacional" />
+          <EntitySet Name="GrupoOcupacional" EntityType="Self.GrupoOcupacional" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" />
+          <EntitySet Name="Politicas" EntityType="Self.Politicas" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UnidadOrganizativa" EntityType="Self.UnidadOrganizativa" />
+          <EntitySet Name="UnidadOrganizativaPoliticas" EntityType="Self.UnidadOrganizativaPoliticas" />
+          <EntitySet Name="UserApps" EntityType="Self.UserApps" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Actividades_ActividadEstatus" Association="Self.FK_Actividades_ActividadEstatus">
+            <End Role="ActividadEstatus" EntitySet="ActividadEstatus" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_Cargo1" Association="Self.FK_Actividades_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_Empleados1" Association="Self.FK_Actividades_Empleados1">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_UnidadOrganizativa2" Association="Self.FK_Actividades_UnidadOrganizativa2">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Actividades_UnidadOrganizativa3" Association="Self.FK_Actividades_UnidadOrganizativa3">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserApps_AppWeb" Association="Self.FK_UserApps_AppWeb">
+            <End Role="AppWeb" EntitySet="AppWeb" />
+            <End Role="UserApps" EntitySet="UserApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Cargo" Association="Self.FK_Empleados_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_GrupoOcupacional" Association="Self.FK_Empleados_GrupoOcupacional">
+            <End Role="GrupoOcupacional" EntitySet="GrupoOcupacional" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Periodo" Association="Self.FK_Empleados_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Supervisor" Association="Self.FK_Empleados_Supervisor">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Empleados1" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Unidad" Association="Self.FK_Empleados_Unidad">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_Estatus" Association="Self.FK_UnidadOrganizativaPoliticas_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstructuraOrganizacional_UnidadOrdChild" Association="Self.FK_EstructuraOrganizacional_UnidadOrdChild">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="EstructuraOrganizacional" EntitySet="EstructuraOrganizacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstructuraOrganizacional_UnidadOrg" Association="Self.FK_EstructuraOrganizacional_UnidadOrg">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="EstructuraOrganizacional" EntitySet="EstructuraOrganizacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_Politicas" Association="Self.FK_UnidadOrganizativaPoliticas_Politicas">
+            <End Role="Politicas" EntitySet="Politicas" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnidadOrganizativaPoliticas_UnidadOrganizativa" Association="Self.FK_UnidadOrganizativaPoliticas_UnidadOrganizativa">
+            <End Role="UnidadOrganizativa" EntitySet="UnidadOrganizativa" />
+            <End Role="UnidadOrganizativaPoliticas" EntitySet="UnidadOrganizativaPoliticas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserApps_Users" Association="Self.FK_UserApps_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserApps" EntitySet="UserApps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="smacModelStoreContainer" CdmEntityContainer="smacEntities2">
+          <EntitySetMapping Name="Actividades">
+            <EntityTypeMapping TypeName="smacModel.Actividades">
+              <MappingFragment StoreEntitySet="Actividades">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Actividad" ColumnName="Actividad" />
+                <ScalarProperty Name="Dirigido" ColumnName="Dirigido" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActividadEstatus">
+            <EntityTypeMapping TypeName="smacModel.ActividadEstatus">
+              <MappingFragment StoreEntitySet="ActividadEstatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppLogins">
+            <EntityTypeMapping TypeName="smacModel.AppLogins">
+              <MappingFragment StoreEntitySet="AppLogins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppWeb" ColumnName="AppWeb" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="HoraLogin" ColumnName="HoraLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppWeb">
+            <EntityTypeMapping TypeName="smacModel.AppWeb">
+              <MappingFragment StoreEntitySet="AppWeb">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Enlace" ColumnName="Enlace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargo">
+            <EntityTypeMapping TypeName="smacModel.Cargo">
+              <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="smacModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="GrupoOcupacionalId" ColumnName="GrupoOcupacionalId" />
+                <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
+                <ScalarProperty Name="UnidadId" ColumnName="UnidadId" />
+                <ScalarProperty Name="CargoId" ColumnName="CargoId" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="UsuarioAD" ColumnName="UsuarioAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus">
+            <EntityTypeMapping TypeName="smacModel.Estatus">
+              <MappingFragment StoreEntitySet="Estatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstructuraOrganizacional">
+            <EntityTypeMapping TypeName="smacModel.EstructuraOrganizacional">
+              <MappingFragment StoreEntitySet="EstructuraOrganizacional">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UnidadPadreId" ColumnName="UnidadPadreId" />
+                <ScalarProperty Name="UnidadDependeciaId" ColumnName="UnidadDependeciaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoOcupacional">
+            <EntityTypeMapping TypeName="smacModel.GrupoOcupacional">
+              <MappingFragment StoreEntitySet="GrupoOcupacional">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periodo">
+            <EntityTypeMapping TypeName="smacModel.Periodo">
+              <MappingFragment StoreEntitySet="Periodo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Politicas">
+            <EntityTypeMapping TypeName="smacModel.Politicas">
+              <MappingFragment StoreEntitySet="Politicas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Categorias" ColumnName="Categorias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="smacModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="smacModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnidadOrganizativa">
+            <EntityTypeMapping TypeName="smacModel.UnidadOrganizativa">
+              <MappingFragment StoreEntitySet="UnidadOrganizativa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="UnidadApoyo" ColumnName="UnidadApoyo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnidadOrganizativaPoliticas">
+            <EntityTypeMapping TypeName="smacModel.UnidadOrganizativaPoliticas">
+              <MappingFragment StoreEntitySet="UnidadOrganizativaPoliticas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UnidadOrganizativaId" ColumnName="UnidadOrganizativaId" />
+                <ScalarProperty Name="PoliticasId" ColumnName="PoliticasId" />
+                <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserApps">
+            <EntityTypeMapping TypeName="smacModel.UserApps">
+              <MappingFragment StoreEntitySet="UserApps">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppWeb" ColumnName="AppWeb" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="smacModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

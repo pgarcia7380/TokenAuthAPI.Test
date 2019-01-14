@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c1abdfdccecf45d6aa36dc7bb997a6bb" Name="Diagram1">
+        <EntityTypeShape EntityType="smacModel.Actividades" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.ActividadEstatus" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.AppLogins" Width="1.5" PointX="5.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.AppWeb" Width="1.5" PointX="5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Cargo" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Empleados" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Estatus" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.EstructuraOrganizacional" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.GrupoOcupacional" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Periodo" Width="1.5" PointX="3.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Politicas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Role" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.UnidadOrganizativa" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.UnidadOrganizativaPoliticas" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.UserApps" Width="1.5" PointX="7.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="smacModel.Users" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="smacModel.FK_Actividades_ActividadEstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Actividades_Cargo1" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Actividades_Empleados1" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Actividades_UnidadOrganizativa2" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Actividades_UnidadOrganizativa3" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_UserApps_AppWeb" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Empleados_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Empleados_GrupoOcupacional" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Empleados_Periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Empleados_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Empleados_Unidad" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_UnidadOrganizativaPoliticas_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_EstructuraOrganizacional_UnidadOrdChild" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_EstructuraOrganizacional_UnidadOrg" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_UnidadOrganizativaPoliticas_Politicas" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_Users_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_UnidadOrganizativaPoliticas_UnidadOrganizativa" ManuallyRouted="false" />
+        <AssociationConnector Association="smacModel.FK_UserApps_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
